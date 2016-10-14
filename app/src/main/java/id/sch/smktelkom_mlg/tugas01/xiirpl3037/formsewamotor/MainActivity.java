@@ -51,9 +51,19 @@ public class MainActivity extends AppCompatActivity {
         String nama = etNama.getText().toString();
         String alamat = etAlamat.getText().toString();
         String lama = etLama.getText().toString();
+        String motor = spJenisMotor.getSelectedItem().toString();
+        int ls = Integer.parseInt(lama);
         String acc = "\nAccessories\t\t: ";
         int startlen = acc.length();
+        int a, b, c;
 
+        if (nama == null) {
+            etNama.setError("Nama Belum diisi");
+        } else if (alamat == null) {
+            etAlamat.setError("Alamat Belum diisi");
+        } else if (lama == null) {
+            etLama.setError("Lama sewa belum ditentukan");
+        }
         if (rgJK.getCheckedRadioButtonId() != -1) {
             RadioButton rb = (RadioButton)
                     findViewById(rgJK.getCheckedRadioButtonId());
@@ -62,9 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
         if (cbH.isChecked()) {
             acc += "\n\t\t\t\t\t\t- " + cbH.getText();
+            a = 15000;
+        } else {
+            a = 0;
         }
-        if (cbJH.isChecked()) acc += "\n\t\t\t\t\t\t- " + cbJH.getText();
-        if (cbM.isChecked()) acc += "\n\t\t\t\t\t\t- " + cbM.getText();
+        if (cbJH.isChecked()) {
+            acc += "\n\t\t\t\t\t\t- " + cbJH.getText();
+            b = 10000;
+        } else {
+            b = 0;
+        }
+
+        if (cbM.isChecked()) {
+            acc += "\n\t\t\t\t\t\t- " + cbM.getText();
+            c = 5000;
+        } else {
+            c = 0;
+        }
         if (acc.length() == startlen) acc += "-";
 
         if (hasil == null) {
@@ -73,9 +97,17 @@ public class MainActivity extends AppCompatActivity {
             tvHasil.setText("Nama\t\t\t\t\t: " + nama
                     + "\nAlamat\t\t\t\t: " + alamat
                     + "\nJenis Kelamin\t: " + hasil
-                    + "\nJenis Motor\t\t: " + spJenisMotor.getSelectedItem().toString()
+                    + "\nJenis Motor\t\t: " + motor
                     + "\nLama Sewa\t\t: " + lama + " Hari"
-                    + acc);
+                    + acc
+                    + "\nBiaya Sewa\t\t: Rp." + ((ls * 60000) + (ls * a) + (ls * b) + (ls * c)));
+            etNama.setText("");
+            etAlamat.setText("");
+            etLama.setText("");
+            rgJK.clearCheck();
+            cbJH.setChecked(false);
+            cbM.setChecked(false);
+            cbH.setChecked(false);
         }
     }
 }

@@ -126,7 +126,7 @@
             android:layout_alignRight="@+id/checkBoxH"
             android:layout_alignStart="@+id/checkBoxH"
             android:layout_below="@+id/spinnerMotor"
-            android:inputType="numberSigned" />
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/textView6"
